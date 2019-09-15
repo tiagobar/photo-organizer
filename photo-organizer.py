@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os
+import sys
 import shutil
 from datetime import datetime
 from PIL import Image
@@ -27,19 +28,27 @@ class PhotoOrganizer:
         return date
 
     def move_photo(self, file):
-        new_folder = self.folder_path_from_photo_date(file)
+        file_dir = os.path.dirname(file)
+        file_name = os.path.basename(file)
+
+        new_folder = file_dir + '/' + self.folder_path_from_photo_date(file)
         if not os.path.exists(new_folder):
             os.makedirs(new_folder)
-        shutil.move(file, new_folder + '/' + file)
 
-    def organize(self):
+        shutil.move(file, new_folder + '/' + file_name)
+
+    def organize(self, dir_to_process=None):
+        if dir_to_process is None:
+            dir_to_process = '.'
+
         photos = [
-            filename for filename in os.listdir('.')
-                if os.path.isfile(filename) and any(filename.lower().endswith('.' + ext.lower()) for ext in self.extensions)
+            dir_to_process + '/' + filename for filename in os.listdir(dir_to_process)
+                if os.path.isfile(dir_to_process + '/' + filename) and any(filename.lower().endswith('.' + ext.lower()) for ext in self.extensions)
         ]
         for filename in photos:
             self.move_photo(filename)
 
 
+arg_dir = sys.argv[1] if len(sys.argv) > 1 else None
 PO = PhotoOrganizer()
-PO.organize()
+PO.organize(arg_dir)

@@ -1,0 +1,12 @@
+[Nemo Action]
+Name=Organize Photos Here
+Comment=Organize photos from selected directory
+
+Quote=double
+
+Exec=<photo-organizer.py %P>
+
+Selection=Any
+
+Extensions=jpg;jpeg;png;
+

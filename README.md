@@ -45,15 +45,30 @@ chmod +x photo-organizer.py
 Call script inside a folder with photos:
 
 ```
-./photo-organizer.py .
+./photo-organizer.py
 ```
+
+Or call the script passing the name of a folder with photos as the first parameter:
+
+```
+./photo-organizer.py /home/user/Images/my_photos_to_organize
+```
+
+**For Nemo (Linux Mint/Cinnamon) in Context Menu:**
+
+1. Copy both photo-organizer.py and photo-organizer.nemo_action on your nemo actions directory:
+```
+cp photo-organizer.{py,nemo_action} $HOME/.local/share/nemo/actions
+```
+
+2. It's ready! You don't need even to restart.
 
 ### Windows
 
 To run a test, call the script inside a folder with photos.
 
 ```
-python photo-organizer.py .
+python photo-organizer.py
 ```
 
 **For Windows in Context Menu:**
